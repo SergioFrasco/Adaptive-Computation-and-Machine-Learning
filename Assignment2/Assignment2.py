@@ -46,8 +46,6 @@ def centerUpdate(clusters):
             xCenter = sum(point[0] for point in cluster) / len(cluster)
             yCenter = sum(point[1] for point in cluster) / len(cluster)
             centers.append([xCenter, yCenter])
-        else:
-            centers.append(None)
     return centers
 
 # K means algorithm
@@ -59,12 +57,7 @@ def kmeans(data, k, initial_centers):
         if new_centers == centers:
             break
         centers = new_centers
-
-    #  Remove empty clusters and centers
-    non_empty_clusters = [cluster for cluster in clusters if len(cluster) > 0]
-    non_empty_centers = [centroid for centroid, cluster in zip(centers, clusters) if len(cluster) > 0]
-
-    return non_empty_clusters, non_empty_centers
+    return clusters, centers
 
 # Sum of squares error
 def ssError(clusters, centers):
