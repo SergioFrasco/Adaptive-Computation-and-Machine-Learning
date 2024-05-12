@@ -59,7 +59,12 @@ def kmeans(data, k, initial_centers):
         if new_centers == centers:
             break
         centers = new_centers
-    return clusters, centers
+
+    #  Remove empty clusters and centers
+    non_empty_clusters = [cluster for cluster in clusters if len(cluster) > 0]
+    non_empty_centers = [centroid for centroid, cluster in zip(centers, clusters) if len(cluster) > 0]
+
+    return non_empty_clusters, non_empty_centers
 
 # Sum of squares error
 def ssError(clusters, centers):
